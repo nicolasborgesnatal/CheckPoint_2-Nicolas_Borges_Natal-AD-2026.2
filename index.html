@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Netflix | Atores e Atrizes</title>
+  <!-- Ícones das redes sociais -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Cabeçalho com logo, busca e filtros -->
+  <header class="topo">
+    <img src="img/logo.png" alt="Netflix" class="logo">
+
+    <div class="filtros">
+      <div class="busca">
+        <svg class="icone-busca" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <line x1="15.5" y1="15.5" x2="21" y2="21" />
+        </svg>
+        <input
+          type="text"
+          id="campo-busca"
+          placeholder="Buscar ator ou atriz"
+          aria-label="Buscar ator ou atriz pelo nome"
+          oninput="filtrarAtores()"
+        >
+      </div>
+
+      <!-- As opções são preenchidas pelo arquivo script.js -->
+      <select id="filtro-pais" class="filtro" aria-label="Filtrar por país" onchange="filtrarAtores()">
+        <option value="">Todos os países</option>
+      </select>
+
+      <select id="filtro-decada" class="filtro" aria-label="Filtrar por década de nascimento" onchange="filtrarAtores()">
+        <option value="">Todas as décadas</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="conteudo">
+    <h1 class="titulo">Atores e Atrizes</h1>
+    <p class="contador" id="contador"></p>
+
+    <div class="grid-atores" id="grid-atores"></div>
+
+    <p class="mensagem-vazia" id="mensagem-vazia"></p>
+  </main>
+
+  <!-- Rodapé no estilo da Netflix -->
+  <footer class="rodape">
+    <!-- Redes sociais -->
+    <div class="redes-sociais">
+      <a href="https://www.facebook.com/netflixbrasil" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.instagram.com/netflixbrasil" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitter.com/netflixbrasil" target="_blank" rel="noopener" aria-label="Twitter">
+        <i class="fa-brands fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.youtube.com/@NetflixBrasil" target="_blank" rel="noopener" aria-label="YouTube">
+        <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <!-- Links em 4 colunas -->
+    <ul class="links-rodape">
+      <li><a href="#">Audiodescrição</a></li>
+      <li><a href="#">Central de Ajuda</a></li>
+      <li><a href="#">Cartão pré-pago</a></li>
+      <li><a href="#">Imprensa</a></li>
+      <li><a href="#">Relações com investidores</a></li>
+      <li><a href="#">Carreiras</a></li>
+      <li><a href="#">Termos de Uso</a></li>
+      <li><a href="#">Privacidade</a></li>
+      <li><a href="#">Avisos legais</a></li>
+      <li><a href="#">Preferências de cookies</a></li>
+      <li><a href="#">Informações corporativas</a></li>
+      <li><a href="#">Entre em contato</a></li>
+    </ul>
+
+    <p class="copyright">© 1997-2026 Netflix, Inc.</p>
+    <p class="autor">Checkpoint 2 de Application Development, FIAP. Nícolas Borges Natal, RM 568230, turma 2CCPR. Dados e fotos: TVmaze.</p>
+  </footer>
+
+  <!-- dados.js precisa vir antes do script.js -->
+  <script src="dados.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

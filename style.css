@@ -1,0 +1,381 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Cores da Netflix */
+:root {
+  --vermelho: #e50914;
+  --fundo: #141414;
+  --fundo-card: #2f2f2f;
+  --texto: #e5e5e5;
+  --texto-suave: #a3a3a3;
+}
+
+body {
+  background-color: var(--fundo);
+  color: var(--texto);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabeçalho */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 4%;
+  background-color: #000;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+}
+
+/* Campo de busca */
+.busca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  padding: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.75);
+  border: 1px solid #808080;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+/* Borda branca quando o campo está em foco */
+.busca:focus-within {
+  border-color: #fff;
+}
+
+.icone-busca {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.busca input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 15px;
+}
+
+.busca input::placeholder {
+  color: var(--texto-suave);
+}
+
+/* Filtros */
+/* Busca, país e década lado a lado */
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Selects no mesmo visual da busca */
+.filtro {
+  height: 38px;
+  min-width: 0;
+  padding: 0 36px 0 12px;
+  appearance: none;
+  background-color: rgba(0, 0, 0, 0.75);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23fff'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.filtro:hover,
+.filtro:focus {
+  border-color: #fff;
+  outline: none;
+}
+
+/* Lista de opções escura */
+.filtro option {
+  background-color: #141414;
+  color: #fff;
+}
+
+/* Tela média: filtros descem para baixo da logo */
+@media (max-width: 960px) {
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filtros {
+    width: 100%;
+  }
+
+  .busca {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* Celular: busca em cima, selects divididos embaixo */
+@media (max-width: 600px) {
+  .filtros {
+    flex-wrap: wrap;
+  }
+
+  .busca {
+    flex-basis: 100%;
+  }
+
+  .filtro {
+    flex: 1;
+    font-size: 14px;
+  }
+}
+
+/* Conteúdo */
+.conteudo {
+  flex: 1;
+  padding: 32px 4% 64px;
+}
+
+.titulo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 6px;
+}
+
+.contador {
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+  margin-bottom: 20px;
+}
+
+/* Grid responsivo de cards */
+.grid-atores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 16px;
+}
+
+/* Card */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: var(--fundo-card);
+  animation: aparecer 0.4s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Card cresce ao passar o mouse, igual na Netflix */
+.card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.8);
+  z-index: 2;
+}
+
+/* Barra vermelha que cresce na base do card */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 4px;
+  background-color: var(--vermelho);
+  transition: width 0.3s ease;
+}
+
+.card:hover::after {
+  width: 100%;
+}
+
+.card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+}
+
+/* Nome, país e nascimento sobre a foto */
+.card-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 48px 12px 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 35%, transparent);
+}
+
+.card-info h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.card-info .pais {
+  font-size: 0.82rem;
+  color: var(--texto);
+}
+
+.card-info .nascimento {
+  font-size: 0.78rem;
+  color: var(--texto-suave);
+  margin-top: 2px;
+}
+
+/* Animação de entrada (Aula 9) */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mensagem quando a busca não encontra ninguém */
+.mensagem-vazia {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 1.05rem;
+}
+
+.mensagem-vazia:empty {
+  display: none;
+}
+
+/* Rodapé */
+.rodape {
+  background-color: #000;
+  padding: 32px 20px 40px;
+  color: #808080;
+  font-size: 13px;
+}
+
+/* Ícones centralizados */
+.redes-sociais {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 28px;
+}
+
+.redes-sociais a {
+  color: #fff;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.redes-sociais a:hover {
+  color: #b3b3b3;
+}
+
+/* Links em 4 colunas */
+.links-rodape {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px 24px;
+  max-width: 940px;
+  margin: 0 auto 32px;
+}
+
+.links-rodape a {
+  color: #808080;
+  text-decoration: none;
+}
+
+.links-rodape a:hover {
+  text-decoration: underline;
+}
+
+/* Copyright centralizado */
+.copyright {
+  text-align: center;
+  font-size: 12px;
+}
+
+.autor {
+  text-align: center;
+  font-size: 11px;
+  color: #595959;
+  margin-top: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .topo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 4%;
+  }
+
+  .logo {
+    height: 24px;
+  }
+
+  .busca {
+    width: 100%;
+  }
+
+  .titulo {
+    font-size: 1.4rem;
+  }
+
+  .grid-atores {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .card-info {
+    padding: 36px 8px 10px;
+  }
+
+  .card-info h2 {
+    font-size: 0.88rem;
+  }
+
+  .links-rodape {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Menos movimento para quem desativa animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::after {
+    animation: none;
+    transition: none;
+  }
+}
